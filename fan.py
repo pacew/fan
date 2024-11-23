@@ -1,21 +1,4 @@
 import argparse
-import sys
-
-
-for b in pkt1:
-    print(f'{b:02x}', end=' ')
-print()
-for b in pkt2:
-    print(f'{b:02x}', end=' ')
-print()
-
-
-
-sys.exit(0)
-
-
-
-
 import cc1101
 import time
 import sys
@@ -23,37 +6,6 @@ import sys
 # it works with frequences in this range
 freq_range = [303e6, 307e6]
 freq = sum(freq_range) / len(freq_range)
-
-
-    
-
-
-
-# get these numbers with
-# rtl_433 -f 303.733M -X "n=fan,m=OOK_PCM,s=332,l=332,r=2000"
-codes = {
-    'light-toggle': [
-        bytes([0xb2, 0x49, 0x64, 0x92, 0x58]),
-        bytes([0xb2, 0x49, 0x64, 0x92, 0x48])
-    ],
-    'fan-off': [
-        bytes([0xb2, 0x49, 0x64, 0x92, 0xc8]),
-        bytes([0xb2, 0x49, 0x64, 0x92, 0x48]),
-    ],
-    'fan-low': [
-        bytes([0xb2, 0x49, 0x64, 0xb2, 0x48]),
-        bytes([0xb2, 0x49, 0x64, 0x92, 0x48]),
-    ],
-    'fan-med': [
-        bytes([0xb2, 0x49, 0x65, 0x92, 0x48]),
-        bytes([0xb2, 0x49, 0x64, 0x92, 0x48]),
-    ],
-    'fan-high': [
-        bytes([0xb2, 0x49, 0x6c, 0x92, 0x48]),
-        bytes([0xb2, 0x49, 0x64, 0x92, 0x48]),
-    ],
-}
-
 
 def xmit(pkts):
     with cc1101.CC1101() as transceiver:
