@@ -9,3 +9,49 @@ PWM:
 
 pace@p24:~$ rtl_433 -f 303.725M -X "n=fan,m=OOK_PWM,s=332,l=664,r=2000"
 
+dip to light off code
+
+b2 49 64 92 58/48
+
+1234
+0000 b2 49 64 92 58
+0001 b2 4b 64
+0011 b2 5b 64
+0010 b2 59 64
+0100 b2 c9 64
+0111 b2 db 64
+1000 b6 49 64
+
+freqs
+
+upstairs on table 303.801
+upstairs holding in one hand 303.794
+upstairs holding in two hands 303.786
+downstairs on table 303.731
+downstairs holding in one hand 303.734
+downstairs holding in two hands 303.715
+
+# get these numbers with
+# rtl_433 -f 303.733M -X "n=fan,m=OOK_PCM,s=332,l=332,r=2000"
+codes = {
+    'light-toggle': [
+        bytes([0xb2, 0x49, 0x64, 0x92, 0x58]),
+        bytes([0xb2, 0x49, 0x64, 0x92, 0x48])
+    ],
+    'fan-off': [
+        bytes([0xb2, 0x49, 0x64, 0x92, 0xc8]),
+        bytes([0xb2, 0x49, 0x64, 0x92, 0x48]),
+    ],
+    'fan-low': [
+        bytes([0xb2, 0x49, 0x64, 0xb2, 0x48]),
+        bytes([0xb2, 0x49, 0x64, 0x92, 0x48]),
+    ],
+    'fan-med': [
+        bytes([0xb2, 0x49, 0x65, 0x92, 0x48]),
+        bytes([0xb2, 0x49, 0x64, 0x92, 0x48]),
+    ],
+    'fan-high': [
+        bytes([0xb2, 0x49, 0x6c, 0x92, 0x48]),
+        bytes([0xb2, 0x49, 0x64, 0x92, 0x48]),
+    ],
+}
