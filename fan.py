@@ -18,20 +18,10 @@ with cc1101.CC1101() as transceiver:
     # transceiver.enable_manchester_code()
     print(transceiver)
     for _ in range(6):
-        transceiver.transmit(bytes([0b10110010,
-                                    0b01001001,
-                                    0b01100100,
-                                    0b10010010,
-                                    0b01011000,
-                                    ]))
+        transceiver.transmit(bytes([0xb2, 0x49, 0x64, 0x92, 0x58]))
         time.sleep(0.02)
     for _ in range(2):
-        transceiver.transmit(bytes([0b10110010,
-                                    0b01001001,
-                                    0b01100100,
-                                    0b10010010,
-                                    0b01010000,
-                                    ]))
+        transceiver.transmit(bytes([0xb2, 0x49, 0x64, 0x92, 0x50]))
         time.sleep(0.02)
 
         
