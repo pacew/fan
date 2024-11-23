@@ -5,7 +5,7 @@ import sys
 
 # it works with frequences in this range
 freq_range = [303e6, 307e6]
-freq = sum(freq_range) / len(freq_range)
+freq = sum(freq_range) / len(freq_range)  # use the average of the extremes
 
 def xmit(pkts):
     with cc1101.CC1101() as transceiver:
