@@ -2,15 +2,12 @@ import cc1101
 import time
 import sys
 
-# use sigdigger to find frequencies
-freqs = {
-    'pace-downstairs': 303.733e6,  # observed 303.724
-    'pace-upstairs': 303.799e6,
-}
-
+# it works with frequences in this range
+freq_range = [303e6, 307e6]
+freq = sum(freq_range) / len(freq_range)
 
 # get these numbers with
-# rtl_433 -f 303.725M -X "n=fan,m=OOK_PCM,s=332,l=332,r=2000"
+# rtl_433 -f 303.733M -X "n=fan,m=OOK_PCM,s=332,l=332,r=2000"
 codes = {
     'light-toggle': [
         bytes([0xb2, 0x49, 0x64, 0x92, 0x58]),
@@ -36,9 +33,6 @@ codes = {
 
 
 def xmit(button):
-    # freq = 303.725e6 + 28000
-    # freq = 303.731e6
-    freq = freqs['pace-downstairs']
     with cc1101.CC1101() as transceiver:
         transceiver.set_base_frequency_hertz(freq)
         transceiver.set_symbol_rate_baud(3035)
