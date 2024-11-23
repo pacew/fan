@@ -4,6 +4,13 @@ import time
 # printf '\x20\x81' | cc1101-transmit -f 303725000 -r 1000 ^C
 # can be seen by rtl_433 -f 303.725M -A
 
+# get these numbers with
+# rtl_433 -f 303.725M -X "n=fan,m=OOK_PCM,s=332,l=332,r=2000"
+codes = {
+    'light-on': [bytes([0xb2, 0x49, 0x64, 0x92, 0x58]),
+                 bytes([0xb2, 0x49, 0x64, 0x92, 0x50])],
+}
+
 
 freq = 303.725e6 + 28000
 # freq = 433.92e6
@@ -17,11 +24,14 @@ with cc1101.CC1101() as transceiver:
     transceiver.set_output_power((0, 0xC0))  # OOK modulation: (off, on)
     # transceiver.enable_manchester_code()
     print(transceiver)
+
+    code = codes['light-on']
+
     for _ in range(6):
-        transceiver.transmit(bytes([0xb2, 0x49, 0x64, 0x92, 0x58]))
+        transceiver.transmit(code[0])
         time.sleep(0.02)
     for _ in range(2):
-        transceiver.transmit(bytes([0xb2, 0x49, 0x64, 0x92, 0x50]))
+        transceiver.transmit(code[1])
         time.sleep(0.02)
 
         
