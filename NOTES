@@ -1,0 +1,11 @@
+light on
+[00] {16} 20 81     : 00100000 10000001 
+\x20\x81
+
+printf '\x20\x81' | cc1101-transmit -f 303725000 -r 1000
+
+
+PWM:
+
+pace@p24:~$ rtl_433 -f 303.725M -X "n=fan,m=OOK_PWM,s=332,l=664,r=2000"
+
