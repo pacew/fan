@@ -5,12 +5,16 @@ import sys
 
 # it works with frequences in this range
 freq_range = [303e6, 307e6]
-freq = sum(freq_range) / len(freq_range)  # use the average of the extremes
+freq = sum(freq_range) / 2  # use the average of the extremes
+
+# 3035
+baud_range = [2170, 3500]
+baud = sum(baud_range) / 2
 
 def xmit(pkts):
     with cc1101.CC1101() as transceiver:
         transceiver.set_base_frequency_hertz(freq)
-        transceiver.set_symbol_rate_baud(3035)
+        transceiver.set_symbol_rate_baud(baud)
         transceiver.set_sync_mode(cc1101.SyncMode.NO_PREAMBLE_AND_SYNC_WORD)
         transceiver.set_packet_length_mode(cc1101.PacketLengthMode.FIXED)
         transceiver.disable_checksum()
